@@ -19,11 +19,14 @@ import com.example.earthquake_androidapp.type.EarthquakeScaleType;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakeAdapter.ViewHolder> {
 
-    private List<EarthquakeAPI> data;
+    private final List<EarthquakeAPI> data;
+    private final Map<View, EarthquakeAPI> viewMap = new HashMap<>();
 
     public EarthquakeAdapter(List<EarthquakeAPI> data) {
         this.data = new ArrayList<>(data);
@@ -52,6 +55,8 @@ public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakeAdapter.Vi
         holder.scaleText.setText("震度\n" + scaleType.getText());
         holder.scaleText.setBackgroundColor(scaleType.getColorRaw());
         holder.magnitudeText.setText(String.valueOf(hypocenter.getMagnitude()));
+
+        viewMap.put(holder.itemView, data);
     }
 
     @Override
