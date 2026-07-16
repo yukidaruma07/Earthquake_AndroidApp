@@ -18,6 +18,7 @@ import com.example.earthquake_androidapp.type.EarthquakeScaleType;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakeAdapter.ViewHolder> {
@@ -25,7 +26,7 @@ public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakeAdapter.Vi
     private List<EarthquakeAPI> data;
 
     public EarthquakeAdapter(List<EarthquakeAPI> data) {
-        this.data = data;
+        this.data = new ArrayList<>(data);
     }
 
     @NonNull
@@ -56,6 +57,12 @@ public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakeAdapter.Vi
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void update(List<EarthquakeAPI> earthquakeAPIList) {
+        data.clear();
+        data.addAll(earthquakeAPIList);
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

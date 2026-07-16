@@ -12,29 +12,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class EarthquakeAPI {
 
-    public static EarthquakeAPI[] getInstance() {
-        try {
-            URL url = new URL("https://api.p2pquake.net/v2/history?codes=551");
-            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder builder = new StringBuilder();
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                builder.append(line);
-                line = bufferedReader.readLine();
-            }
-            bufferedReader.close();
-
-            return new Gson().fromJson(builder.toString(), EarthquakeAPI[].class);
-
-        }
-        catch (IOException exception) {
-            exception.printStackTrace();
-        }
-        return null;
-    }
-
     private Earthquake earthquake;
     private Point[] points;
 
